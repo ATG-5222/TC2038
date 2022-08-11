@@ -18,7 +18,10 @@ double fastPow(double x, int n) {
 int main(int argc, char* argv[]) {
 	double x;
 	int n;
-    
-	cin >> x >> n;
+    cout << "Introducir la base: ";
+    cin >> x;
+    cout << "Introducir la potencia: ";
+    cin >> n;
+	//cin >> x >> n;
 	cout << x << "^" << n << " = " << fastPow(x,n) << "\n";
 }
