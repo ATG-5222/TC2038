@@ -3,6 +3,7 @@
 #include <limits>
 #include <string>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -15,12 +16,24 @@ fstream& GotoLine(fstream& file, unsigned int num){
 }
 
 int main(){
-    vector<string> STR;
+    vector<int> nums;
     fstream file("input1.txt");
     GotoLine(file, 4);
     string st;
     getline(file, st);
-    STR.push_back(st);
-    cout << STR[0] << endl;
+
+    stringstream stream(st);
+    while(1) {
+        int n;
+        stream >> n;
+        if(!stream)
+        break;
+        nums.push_back(n);
+    }
+
+    for (int i = 0; i < nums.size(); i++) {
+        cout << nums[i] << " ";
+    }
+
     return 0;
 }
