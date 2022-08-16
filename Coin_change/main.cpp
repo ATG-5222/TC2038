@@ -1,9 +1,6 @@
-// C++ program to find minimum
-// number of denominations
 #include <bits/stdc++.h>
 using namespace std;
 
-// All denominations of Indian Currency
 int deno[] = { 1, 2, 5, 10, 20,50, 100, 500, 1000 };
 int n = sizeof(deno) / sizeof(deno[0]);
 
