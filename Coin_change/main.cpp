@@ -19,7 +19,7 @@ fstream& GotoLine(fstream& file, unsigned int num){
     return file;
 }
 
-void greedy(int quantity, vector<int> denominations){
+void greedy(int quantity, vector<int> denominations,ofstream& file){
     int cq = quantity;
     sort(denominations.begin(), denominations.end());
     vector<int> change;
@@ -30,15 +30,15 @@ void greedy(int quantity, vector<int> denominations){
         }
     }
     sort(change.begin(), change.end());
-    cout << "GREEDY SOLUTION, TOTAL COINS = " << change.size() << endl;
+    file << "GREEDY SOLUTION, TOTAL COINS = " << change.size() << endl;
     map<int,int> frequency;
     for(int i: change){
         frequency[i]++;
     }
     for(const auto& c: frequency){
-        cout << "Currency = " << c.first << " AMOUNT = " << c.second << endl;
+        file << "Currency = " << c.first << " AMOUNT = " << c.second << endl;
     }
-    cout << endl;
+    file << endl;
 }
 
 int main(int argc, char* argv[]){
@@ -71,26 +71,25 @@ int main(int argc, char* argv[]){
         denominations.push_back(d);
     }
 
-    cout << "argv[1]" << argv[1] << endl;
     string s = argv[1];
 
-    ofstream myfile;
+    ofstream file;
     if(s=="input1.txt"){
-        myfile.open("mysolution1.txt");
+        file.open("mysolution1.txt");
     }
     else if(s=="input2.txt"){
-        myfile.open("mysolution2.txt");
+        file.open("mysolution2.txt");
     }
     else if(s=="input3.txt"){
-        myfile.open("mysolution3.txt");
+        file.open("mysolution3.txt");
     }
     else{
-        myfile.open("mysolution4.txt");
+        file.open("mysolution4.txt");
     }
 
     for (int i = 0; i < quantities.size(); i++) {
-        myfile << "QUERY #" << counter <<", CHANGE = " << quantities[i] << endl;
-        greedy(quantities[i],denominations);
+        file << "QUERY #" << counter <<", CHANGE = " << quantities[i] << endl;
+        greedy(quantities[i],denominations,file);
         counter++;
     }
 
