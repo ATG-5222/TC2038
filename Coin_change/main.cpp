@@ -8,6 +8,8 @@
 
 using namespace std;
 
+int count = 0;
+
 fstream& GotoLine(fstream& file, unsigned int num){
     file.seekg(ios::beg);
     for(int i=0; i < num - 1; ++i){
@@ -16,29 +18,25 @@ fstream& GotoLine(fstream& file, unsigned int num){
     return file;
 }
 
-void findMin(int quantity, vector<int>& denominations){
-
-    cout << quantity << endl;
-    for (int i = 0; i < denominations.size(); i++) {
-        cout << denominations[i] << "-";
-    }
-    /*
+void findMin(int quantity, vector<int> denominations){
+    count++;
+    int cq = quantity;
     sort(denominations.begin(), denominations.end());
-    // Initialize result
     vector<int> change;
-    // Traverse through all denomination
-    for (int i = num - 1; i >= 0; i--) {
-        // Find denominations
-        while (num >= denominations[i]) {
-            num -= denominations[i];
+    for (int i = denominations.size() - 1; i >= 0; i--) {
+        while (cq >= denominations[i]) {
+            cq -= denominations[i];
             change.push_back(denominations[i]);
         }
     }
-    // Print result
-    cout << "Cambio para: " << num << ": ";
+
+
+    cout << "Cambio para " << quantity << ": ";
     for (int i = 0; i < change.size(); i++){
         cout << change[i] << " ";
-    }*/
+    }
+    cout << endl;
+    
 }
 
 int main(){
@@ -72,16 +70,8 @@ int main(){
     }
 
     for (int i = 0; i < quantities.size(); i++) {
-        //findMin(quantities[i],denominations);
-        cout << quantities[i] << "-";
+        findMin(quantities[i],denominations);
     }
-
-    /*
-    cout << endl;
-    for (int i = 0; i < denominations.size(); i++) {
-        //findMin(quantities[i],denominations);
-        cout << denominations[i] << "-";
-    }*/
 
     return 0;
 }
