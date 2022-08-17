@@ -8,6 +8,8 @@
 
 using namespace std;
 
+int counter=0;
+
 fstream& GotoLine(fstream& file, unsigned int num){
     file.seekg(ios::beg);
     for(int i=0; i < num - 1; ++i){
@@ -26,11 +28,33 @@ void findMin(int quantity, vector<int> denominations){
             change.push_back(denominations[i]);
         }
     }
+    sort(change.begin(), change.end());
 
-    cout << "Cambio para " << quantity << ": ";
-    for (int i = 0; i < change.size(); i++){
-        cout << change[i] << " ";
+
+    cout << "GREEDY SOLUTION, TOTAL COINS = " << change.size() << endl;
+
+    int ant=change[0];
+    int counter=1;
+    int limit = change.size();
+
+    for (int i = 1; i < change.size(); i++){
+        if(limit==1){
+            cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
+        }
+        else if(ant!=change[i]){
+            cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
+            counter=1;
+        }
+        else if(i+1==limit){
+            counter++;
+            cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
+        }
+        else{
+            counter++;
+        }
+        ant=change[i];
     }
+
     cout << endl;
 
 }
@@ -66,6 +90,8 @@ int main(){
     }
 
     for (int i = 0; i < quantities.size(); i++) {
+        counter++;
+        cout << "QUERY #" << counter <<", CHANGE = " << quantities[i] << endl;
         findMin(quantities[i],denominations);
     }
 
