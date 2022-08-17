@@ -5,10 +5,12 @@
 #include <vector>
 #include <sstream>
 #include <bits/stdc++.h>
+#include <algorithm>
+#include <map>
 
 using namespace std;
 
-int counter=0;
+int counter=1;
 
 fstream& GotoLine(fstream& file, unsigned int num){
     file.seekg(ios::beg);
@@ -18,7 +20,7 @@ fstream& GotoLine(fstream& file, unsigned int num){
     return file;
 }
 
-void findMin(int quantity, vector<int> denominations){
+void greedy(int quantity, vector<int> denominations){
     int cq = quantity;
     sort(denominations.begin(), denominations.end());
     vector<int> change;
@@ -30,33 +32,41 @@ void findMin(int quantity, vector<int> denominations){
     }
     sort(change.begin(), change.end());
 
-
     cout << "GREEDY SOLUTION, TOTAL COINS = " << change.size() << endl;
 
     int ant=change[0];
-    int counter=1;
+    int counter=0;
     int limit = change.size();
 
-    for (int i = 1; i < change.size(); i++){
-        if(limit==1){
-            cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
-        }
-        else if(ant!=change[i]){
-            cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
-            counter=1;
-        }
-        else if(i+1==limit){
-            counter++;
-            cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
-        }
-        else{
-            counter++;
-        }
-        ant=change[i];
+    cout << "Limit: " << limit << endl;
+
+    if(limit==1){
+        counter++;
+        cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
     }
-
+    else{
+        for (int i = 0; i < change.size(); i++){
+            //cout << i << " : " << change[i] << endl;
+            if(ant==change[i]){
+                counter++;
+            }
+            else if(ant!=change[i]){
+                cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
+                counter=1;
+            }
+            else if(i+1==limit){
+                if(change[i]==change[i+1]){
+                    counter++;
+                    cout << "CURRENCY = " << change[i] << " AMOUNT = " << counter << endl;
+                }
+                else{
+                    cout << "CURRENCY = " << change[i]+1 << " AMOUNT = 1" << endl;
+                }
+            }
+            ant=change[i];
+        }
+    }
     cout << endl;
-
 }
 
 int main(){
@@ -90,9 +100,9 @@ int main(){
     }
 
     for (int i = 0; i < quantities.size(); i++) {
-        counter++;
         cout << "QUERY #" << counter <<", CHANGE = " << quantities[i] << endl;
-        findMin(quantities[i],denominations);
+        greedy(quantities[i],denominations);
+        counter++;
     }
 
     return 0;
