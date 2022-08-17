@@ -1,12 +1,11 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <limits>
 #include <string>
 #include <vector>
-#include <sstream>
-#include <bits/stdc++.h>
-#include <algorithm>
 #include <map>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -31,40 +30,13 @@ void greedy(int quantity, vector<int> denominations){
         }
     }
     sort(change.begin(), change.end());
-
     cout << "GREEDY SOLUTION, TOTAL COINS = " << change.size() << endl;
-
-    int ant=change[0];
-    int counter=0;
-    int limit = change.size();
-
-    cout << "Limit: " << limit << endl;
-
-    if(limit==1){
-        counter++;
-        cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
+    map<int,int> frequency;
+    for(int i: change){
+        frequency[i]++;
     }
-    else{
-        for (int i = 0; i < change.size(); i++){
-            //cout << i << " : " << change[i] << endl;
-            if(ant==change[i]){
-                counter++;
-            }
-            else if(ant!=change[i]){
-                cout << "CURRENCY = " << ant << " AMOUNT = " << counter << endl;
-                counter=1;
-            }
-            else if(i+1==limit){
-                if(change[i]==change[i+1]){
-                    counter++;
-                    cout << "CURRENCY = " << change[i] << " AMOUNT = " << counter << endl;
-                }
-                else{
-                    cout << "CURRENCY = " << change[i]+1 << " AMOUNT = 1" << endl;
-                }
-            }
-            ant=change[i];
-        }
+    for(const auto& c: frequency){
+        cout << "Currency = " << c.first << " AMOUNT = " << c.second << endl;
     }
     cout << endl;
 }
