@@ -8,8 +8,6 @@
 
 using namespace std;
 
-int count = 0;
-
 fstream& GotoLine(fstream& file, unsigned int num){
     file.seekg(ios::beg);
     for(int i=0; i < num - 1; ++i){
@@ -19,7 +17,6 @@ fstream& GotoLine(fstream& file, unsigned int num){
 }
 
 void findMin(int quantity, vector<int> denominations){
-    count++;
     int cq = quantity;
     sort(denominations.begin(), denominations.end());
     vector<int> change;
@@ -30,13 +27,12 @@ void findMin(int quantity, vector<int> denominations){
         }
     }
 
-
     cout << "Cambio para " << quantity << ": ";
     for (int i = 0; i < change.size(); i++){
         cout << change[i] << " ";
     }
     cout << endl;
-    
+
 }
 
 int main(){
