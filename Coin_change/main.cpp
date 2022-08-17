@@ -41,10 +41,10 @@ void greedy(int quantity, vector<int> denominations){
     cout << endl;
 }
 
-int main(){
+int main(int argc, char* argv[]){
 
     vector<int> quantities;
-    fstream fileq("input1.txt");
+    fstream fileq(argv[1]);
     GotoLine(fileq, 4);
     string quan;
     getline(fileq,quan);
@@ -58,7 +58,7 @@ int main(){
     }
 
     vector<int> denominations;
-    fstream filed("input1.txt");
+    fstream filed(argv[1]);
     GotoLine(filed, 2);
     string deno;
     getline(filed,deno);
@@ -71,8 +71,25 @@ int main(){
         denominations.push_back(d);
     }
 
+    cout << "argv[1]" << argv[1] << endl;
+    string s = argv[1];
+
+    ofstream myfile;
+    if(s=="input1.txt"){
+        myfile.open("mysolution1.txt");
+    }
+    else if(s=="input2.txt"){
+        myfile.open("mysolution2.txt");
+    }
+    else if(s=="input3.txt"){
+        myfile.open("mysolution3.txt");
+    }
+    else{
+        myfile.open("mysolution4.txt");
+    }
+
     for (int i = 0; i < quantities.size(); i++) {
-        cout << "QUERY #" << counter <<", CHANGE = " << quantities[i] << endl;
+        myfile << "QUERY #" << counter <<", CHANGE = " << quantities[i] << endl;
         greedy(quantities[i],denominations);
         counter++;
     }
