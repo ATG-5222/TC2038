@@ -11,7 +11,7 @@ using namespace std;
 
 int counter=1;
 
-fstream& GotoLine(fstream& file, unsigned int num){
+fstream& GotoLine(fstream& file,unsigned int num){
     file.seekg(ios::beg);
     for(int i=0; i < num - 1; ++i){
         file.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -19,7 +19,7 @@ fstream& GotoLine(fstream& file, unsigned int num){
     return file;
 }
 
-void greedy(int quantity, vector<int> denominations,ofstream& file){
+void greedy(int quantity,vector<int> denominations,ofstream& file){
     int cq = quantity;
     sort(denominations.begin(), denominations.end());
     vector<int> change;
@@ -41,7 +41,7 @@ void greedy(int quantity, vector<int> denominations,ofstream& file){
     file << endl;
 }
 
-int main(int argc, char* argv[]){
+int main(int argc,char* argv[]){
 
     vector<int> quantities;
     fstream fileq(argv[1]);
@@ -59,7 +59,7 @@ int main(int argc, char* argv[]){
 
     vector<int> denominations;
     fstream filed(argv[1]);
-    GotoLine(filed, 2);
+    GotoLine(filed,2);
     string deno;
     getline(filed,deno);
     stringstream streamd(deno);
