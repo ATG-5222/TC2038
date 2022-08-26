@@ -48,7 +48,7 @@ void dynamic_programming(vector<int> coins, int number, int size) {
 
 
 int main(int argc, char* argv[]) {
-    int number = 50; 
+    int number = 76; 
     vector<int> coins = {17,14,4,20,1,19,8};
     int size = coins.size();
     dynamic_programming(coins,number,size);

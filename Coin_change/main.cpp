@@ -45,7 +45,7 @@ void greedy(int quantity,vector<int> denominations,ofstream& file){
 }
 
 void dynamic_programming(int quantity,vector<int> denominations,int size,ofstream& file) {
-	int value_limit = number + 1;
+	int value_limit = quantity + 1;
     int aux[value_limit];
     int used_coins[value_limit];
     int valueN=quantity;
@@ -79,7 +79,7 @@ void dynamic_programming(int quantity,vector<int> denominations,int size,ofstrea
     for(const auto& c: frequency){
         file << "Currency = " << c.first << " AMOUNT = " << c.second << endl;
     }
-    file << "---------";
+    file << "---------" << endl;
 }
 
 int main(int argc,char* argv[]){
@@ -131,11 +131,10 @@ int main(int argc,char* argv[]){
     int size = denominations.size();
 
     for (int i = 0; i < quantities.size(); i++) {
+        //cout << quantities[i] << endl;
         file << "QUERY #" << counter <<", CHANGE = " << quantities[i] << endl;
         greedy(quantities[i],denominations,file);
         dynamic_programming(quantities[i],denominations,size,file);
         counter++;
     }
-
-    return 0;
 }
