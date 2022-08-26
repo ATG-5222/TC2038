@@ -44,6 +44,44 @@ void greedy(int quantity,vector<int> denominations,ofstream& file){
     file << endl;
 }
 
+void dynamic_programming(int quantity,vector<int> denominations,int size,ofstream& file) {
+	int value_limit = number + 1;
+    int aux[value_limit];
+    int used_coins[value_limit];
+    int valueN=quantity;
+    vector<int> change;
+
+	for (int i = 0; i < value_limit; i++) {
+		aux[i] = INT_MAX;
+	}
+	aux[0] = 0;
+    for(int i = 1; i <= quantity; i++){
+        for(int j = 0; j < size; j++){
+            if(denominations[j] <= i && ( 1+ aux[i - denominations[j]] < aux[i]) ){
+                aux[i]=1+aux[i - denominations[j]];
+                used_coins[i]=denominations[j];
+            }
+        }
+    }
+    for(int i=valueN; i>=1; ){
+        change.push_back(used_coins[i]);
+        int j=i;
+        i=valueN-used_coins[i];
+        valueN = valueN - used_coins[j];
+    }
+
+    sort(change.begin(), change.end());
+    file << "DP SOLUTION, TOTAL COINS = " << change.size() << endl;
+    map<int,int> frequency;
+    for(int i: change){
+        frequency[i]++;
+    }
+    for(const auto& c: frequency){
+        file << "Currency = " << c.first << " AMOUNT = " << c.second << endl;
+    }
+    file << "---------";
+}
+
 int main(int argc,char* argv[]){
 
     vector<int> quantities;
@@ -90,9 +128,12 @@ int main(int argc,char* argv[]){
         file.open("mysolution4.txt");
     }
 
+    int size = denominations.size();
+
     for (int i = 0; i < quantities.size(); i++) {
         file << "QUERY #" << counter <<", CHANGE = " << quantities[i] << endl;
         greedy(quantities[i],denominations,file);
+        dynamic_programming(quantities[i],denominations,size,file);
         counter++;
     }
 
