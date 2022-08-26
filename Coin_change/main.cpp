@@ -1,10 +1,13 @@
 #include <iostream>
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 #include <limits>
 #include <string>
 #include <vector>
 #include <map>
+#include <stdio.h>
+#include <stdlib.h>
 #include <bits/stdc++.h>
 
 using namespace std;
