@@ -64,6 +64,57 @@ void CodigosMaliciosos(string t1,string t2,string mc1,string mc2,string mc3) {
     }
 }
 
+// Parte 2 - Códigos maliciosos nuevos en formato "espejeado" (o palídromos)
+// Complejidad: O(n)
+
+string x(string y) {
+    string z;
+    for(int i = 0; i < y.size(); i++) {
+        if(y[i] != ' ') {
+            z += "#";  
+            z += y[i];
+        }
+    }
+    z += "#";
+    return z;
+}
+
+void F(string text) {
+    string k = x(text);
+    int a, b, c, d, e, f, p[k.length()];
+    b = c = 0;
+    for(a = 0; a < k.length(); a++) {
+        d = b - (a - b);
+        if(c > a){
+            p[a] = min(c - a, p[d]);
+        }
+        else{ 
+            p[a] = 0;
+        }
+        while(k[a + 1 + p[a]] == k[a - 1 - p[a]]) {
+            p[a]++;
+        }
+        if(a + p[a] > c) {
+            b = a, c = a + p[a];
+        }
+    }
+    e = f = 0;
+    for(a = 1; a < k.length(); a++) {
+        if(p[a] > e) {
+            e = p[a], f = a;
+        }
+    }
+    int sum = (f - e)/2;
+    cout << "mirrored code found, start at " << sum << ", ended at " << e + sum << endl;
+}
+
+void Desconocidos(string t1,string t2) {
+    cout << "\ntransmission1.txt:" << endl;
+    F(t1);
+    cout << "\ntransmission2.txt:" << endl;
+    F(t2);
+}
+
 int main() {
     //Declaracion de variables de tipo string
     string t1 = "", t2 = "", mc1 = "", mc2 = "", mc3 = "";
@@ -86,5 +137,9 @@ int main() {
         mc3 = mc3 + l5;
     }
 
+    //Llamado a funciones
+    //Parte 1
     CodigosMaliciosos(t1,t2,mc1,mc2,mc3);
+    //Parte 2
+    Desconocidos(t1,t2);
 }
