@@ -126,13 +126,13 @@ void Subcadena(string t1,string t2){
     int x = t1.size(), y = t2.size(), z[x + 1][y + 1];
     for(int i = 0; i <= x; i++) {
         for(int j = 0; j <= y; j++) {
-            if(i == 0 || j == 0) {
+            if(i == 0 || j == 0){
                 z[i][j] = 0;
             }
-            else if(t1[i - 1] == t2[j -1]) {
+            else if(t1[i - 1] == t2[j -1]){
                 z[i][j] = z[i -1][j -1] + 1;
             }
-            else {
+            else{
                 z[i][j] = max(z[i - 1][j], z[i][j - 1]);
             }
         }
