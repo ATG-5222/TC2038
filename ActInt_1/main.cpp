@@ -2,6 +2,7 @@
 // Archivo: main.cpp
 // Autores:
 //      Aldo Tena García - A01275222
+//      Renato Sebastían Ramirez Calva - A01275401
 // Fecha: 01/09/2022
 // =========================================================
 
@@ -13,7 +14,7 @@ using namespace std;
 
 // Parte 1 - Determinar si existen algunos de los códigos maliciosos en ambos archivos de transmisión
 // Complejidad: O(n)
-void CodigosMaliciosos(string t1,string t2,string mc1,string mc2,string mc3) {
+void CodigosMaliciosos(string t1,string t2,string mc1,string mc2,string mc3){
 
     //Archivo 1 - transmission1.txt
     cout << "transmission1.txt: " << endl;
@@ -67,19 +68,19 @@ void CodigosMaliciosos(string t1,string t2,string mc1,string mc2,string mc3) {
 // Parte 2 - Códigos maliciosos nuevos en formato "espejeado" (o palídromos)
 // Complejidad: O(n)
 
-string x(string y) {
+string x(string text){
     string z;
-    for(int i = 0; i < y.size(); i++) {
-        if(y[i] != ' ') {
+    for(int i = 0; i < text.size(); i++){
+        if(text[i] != ' '){
             z += "#";  
-            z += y[i];
+            z += text[i];
         }
     }
     z += "#";
     return z;
 }
 
-void F(string text) {
+void Encontrar(string text){
     string k = x(text);
     int a, b, c, d, e, f, p[k.length()];
     b = c = 0;
@@ -91,31 +92,59 @@ void F(string text) {
         else{ 
             p[a] = 0;
         }
-        while(k[a + 1 + p[a]] == k[a - 1 - p[a]]) {
+        while(k[a + 1 + p[a]] == k[a - 1 - p[a]]){
             p[a]++;
         }
-        if(a + p[a] > c) {
-            b = a, c = a + p[a];
+        if(a + p[a] > c){
+            b = a; 
+            c = a + p[a];
         }
     }
     e = f = 0;
-    for(a = 1; a < k.length(); a++) {
-        if(p[a] > e) {
-            e = p[a], f = a;
+    for(a = 1; a < k.length(); a++){
+        if(p[a] > e){
+            e = p[a]; 
+            f = a;
         }
     }
     int sum = (f - e)/2;
     cout << "mirrored code found, start at " << sum << ", ended at " << e + sum << endl;
 }
 
-void Desconocidos(string t1,string t2) {
+void Desconocidos(string t1,string t2){
     cout << "\ntransmission1.txt:" << endl;
-    F(t1);
+    Encontrar(t1);
     cout << "\ntransmission2.txt:" << endl;
-    F(t2);
+    Encontrar(t2);
 }
 
-int main() {
+
+// Parte 3 - Subcadena común más larga entre ambos archivos
+// Complejidad: O(nlogn)
+
+void Subcadena(string t1,string t2){
+    int x = t1.size(), y = t2.size(), z[x + 1][y + 1];
+    for(int i = 0; i <= x; i++) {
+        for(int j = 0; j <= y; j++) {
+            if(i == 0 || j == 0) {
+                z[i][j] = 0;
+            }
+            else if(t1[i - 1] == t2[j -1]) {
+                z[i][j] = z[i -1][j -1] + 1;
+            }
+            else {
+                z[i][j] = max(z[i - 1][j], z[i][j - 1]);
+            }
+        }
+    }
+    cout << "\nthe longest common substring between transmission1.txt and transmission2.txt is " << z[x][y] << " characters long" << endl;
+}
+
+int main(){
+
+    // Función Main
+    // Complejidad: O(n)
+
     //Declaracion de variables de tipo string
     string t1 = "", t2 = "", mc1 = "", mc2 = "", mc3 = "";
     string l1,l2,l3,l4,l5;
@@ -142,4 +171,8 @@ int main() {
     CodigosMaliciosos(t1,t2,mc1,mc2,mc3);
     //Parte 2
     Desconocidos(t1,t2);
+    //Parte 3
+    Subcadena(t1,t2);
+
+    return 0;
 }
