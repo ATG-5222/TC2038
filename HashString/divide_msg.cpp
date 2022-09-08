@@ -8,28 +8,30 @@
 
 #include <iostream>
 #include <fstream>
-#include <limits>
 #include <string>
+#include <vector>
 #include <bits/stdc++.h>
-#include <string>
-#include <fstream>
 
-
-using std::stoi;
 using namespace std;
 
-
 int main(int argc, char* argv[]) {
+    vector<string> words;
+    string t1 = "";
+    string l1;
+    ifstream txt1(argv[1]);
 
+    while(getline(txt1, l1)){
+        t1 = t1 + l1;
+    }
 
-    string input;
+    istringstream ss(t1);
+    string word; 
 
-    // Read from the text file
-    ifstream input(argv[0]);
+    while (ss >> word){
+        words.push_back(word);
+    }
 
-    // Use a while loop together with the getline() function to read the file line by line
-    while (getline (MyReadFile, myText)) {
-    // Output the text from the file
-    cout << myText;
+    for (string i: words){
+        cout << i << '-';
     }
 }

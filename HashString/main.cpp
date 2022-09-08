@@ -7,31 +7,47 @@
 // =========================================================
 
 #include <iostream>
-#include <string>
-#include <cstdlib>
 #include <fstream>
+#include <limits>
+#include <string>
+#include <bits/stdc++.h>
+#include <string>
+#include <fstream>
+#include <vector>
 
 using namespace std;
 
-
-void trunc(int l, int n);
-void matrix(int a[][]);
+void trunc(int l, int n, int v[1000]);
+void matrix(int a[1000][1000],int n,int v[1000]);
 
 
 int main(int argc, char* argv[]) {
-    ifstream arch;
-	std::string range, file, texto;  
-    int r, v[], sum, a[][];
+    vector<string> words;
+    string t1 = "";
+    string l1;
+    ifstream txt1(argv[1]);
+    string texto;
+    istringstream ss(t1);
+    string word; 
+
+    while(getline(txt1, l1)){
+        t1 = t1 + l1;
+    }
+
+    int r, v[1000], sum, a[1000][1000];
     float l;
 
-	std::cin >> file >> range;
-    r = stoi(range);
-    arch.open(file, ios::in);
+    while (ss >> word){
+        words.push_back(word);
+    }
+
+    for (string i: words){
+        cout << i << ' ';
+    }
 
     while(!arch.eof()){
-        getline(arch, texto);
+        getline(words[0], texto);
         for (int i = 0; i < texto.size(); i++){
-            
             v[i] = texto[i];
             sum = sum + (int) texto[i];
         }
@@ -39,25 +55,25 @@ int main(int argc, char* argv[]) {
     }
     arch.close();
 
-    //sum = sum%256;
+    r = stoi(words[1]);
+    sum = sum%256;
     l = v.size()/r;
-    trunc(l, r);
-
+    trunc(l,r,v);
 }
 
-void trunc(int l, int n){
+void trunc(int l, int n, int v[]){
     if (l%n != 0){
         l = trunc(l);
         int a[l+1][n];
-        matrix(a[l+1][n])
+        matrix(a[l+1][n],n,v)
         }
         
     l = trunc(l);
     int a[l][n];
-    matrix(a[l][n], n);
+    matrix(a[l][n],n,v);
 }
 
-void matrix( int a[][], int r){
+void matrix(int a[1000][1000],int r, int v [1000]){
     int e = 0;
     for (int i = 0; i < r; i++){
         for (int j = 0; j < r; j++){
