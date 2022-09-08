@@ -25,11 +25,11 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     ifstream arch;
-	std::string range, file, texto;  
+	string range, file, texto;  
     int r, v[][], sum;
     float l;
 
-	std::cin >> file >> range;
+	cin >> file >> range;
     r = stoi(range);
     arch.open(file, ios::in);
 
@@ -59,7 +59,4 @@ int main(int argc, char* argv[]) {
             e++;
         }
     }
-
-    
-
 }
