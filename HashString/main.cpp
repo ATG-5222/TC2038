@@ -17,11 +17,8 @@
 
 using namespace std;
 
-void trunc(int l, int n, int v[1000]);
-void matrix(int a[1000][1000],int n,int v[1000]);
-
-
 int main(int argc, char* argv[]) {
+    ifstream arch;
     vector<string> words;
     string t1 = "";
     string l1;
@@ -34,8 +31,9 @@ int main(int argc, char* argv[]) {
         t1 = t1 + l1;
     }
 
-    int r, v[1000], sum, a[1000][1000];
-    float l;
+    int sum;
+    int l,r;
+    vector<string> v = {""};
 
     while (ss >> word){
         words.push_back(word);
@@ -45,9 +43,13 @@ int main(int argc, char* argv[]) {
         cout << i << ' ';
     }
 
+    arch.open(words[0], ios::in);
+
     while(!arch.eof()){
-        getline(words[0], texto);
+        getline(arch, texto);
         for (int i = 0; i < texto.size(); i++){
+            v.resize(v.size() + texto.size());
+            v.resize(v.size()-1);
             v[i] = texto[i];
             sum = sum + (int) texto[i];
         }
@@ -58,22 +60,14 @@ int main(int argc, char* argv[]) {
     r = stoi(words[1]);
     sum = sum%256;
     l = v.size()/r;
-    trunc(l,r,v);
-}
-
-void trunc(int l, int n, int v[]){
-    if (l%n != 0){
+    if (v.size()%r != 0){
         l = trunc(l);
-        int a[l+1][n];
-        matrix(a[l+1][n],n,v)
-        }
-        
-    l = trunc(l);
-    int a[l][n];
-    matrix(a[l][n],n,v);
-}
+        int a[l+1][r];
+    }
+    if (v.size()%r == 0){
+        int a[l][r];
+    } 
 
-void matrix(int a[1000][1000],int r, int v [1000]){
     int e = 0;
     for (int i = 0; i < r; i++){
         for (int j = 0; j < r; j++){
@@ -83,5 +77,5 @@ void matrix(int a[1000][1000],int r, int v [1000]){
             a[i][j] = v[e];
             e++;
         }
-    }
+    } 
 }
