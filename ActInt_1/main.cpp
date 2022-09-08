@@ -66,7 +66,7 @@ void CodigosMaliciosos(string t1,string t2,string mc1,string mc2,string mc3){
 }
 
 // Parte 2 - Códigos maliciosos nuevos en formato "espejeado" (o palídromos)
-// Complejidad: O(n)
+// Complejidad: O(nlogn)
 
 string x(string text){
     string z;
