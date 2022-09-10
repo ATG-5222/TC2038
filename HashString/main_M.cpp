@@ -3,8 +3,9 @@
 // Authors:
 // Aldo Tena García - A01275222
 // Renato Sebastían Ramirez Calva - A01275401
-// Date: 07-09-2022
+// Date: 26-08-2022
 // =========================================================
+
 
 #include <iostream>
 #include <stdio.h>
@@ -17,37 +18,29 @@
 
 using namespace std;
 
-//Complejidad: O(n)
+
+
+//Complejidad
 int Sum(string str) {
     int sum = 0;
+
     for (int i = 0; i <= str.size(); i++) {
         sum += str[i];
     }
+
     return sum;
 }
 
-//Complejidad: O(n^2)
+// Función main -------------------------------------
+//Complejidad= O(n^2)
 int main(int argc, char* argv[]) {
     vector<vector<char>> M;//Matriz
-    vector<string> words;
-    string t1 = "";
-    string l1;
-    ifstream txt1(argv[1]);
+    string fname; 
+    int n; 
+    cin >> fname;
+    cin >> n;
 
-    while(getline(txt1, l1)){
-        t1 = t1 + l1;
-    }
-
-    istringstream ss(t1);
-    string word; 
-
-    while (ss >> word){
-        words.push_back(word);
-    }
-
-    string fname = words[0];
-    int n = stoi(words[1]);
-
+    // Lectura de archivo
     ifstream arch(fname);
     string str, file_contents;
 
@@ -58,6 +51,7 @@ int main(int argc, char* argv[]) {
     }
 
     arch.close();
+
 
     //Desplegar matriz
     for (int i = 0; i < line.size(); i++){
