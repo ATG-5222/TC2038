@@ -84,7 +84,7 @@ void Encontrar(string text){
     string k = x(text);
     int a, b, c, d, e, f, p[k.length()];
     b = c = 0;
-    for(a = 0; a < k.length(); a++) {
+    for(a = 0; a < k.length(); a++){
         d = b - (a - b);
         if(c > a){
             p[a] = min(c - a, p[d]);
@@ -125,7 +125,7 @@ void Desconocidos(string t1,string t2){
 void Subcadena(string t1,string t2){
     int x = t1.size(), y = t2.size(), z[x + 1][y + 1];
     for(int i = 0; i <= x; i++) {
-        for(int j = 0; j <= y; j++) {
+        for(int j = 0; j <= y; j++){
             if(i == 0 || j == 0){
                 z[i][j] = 0;
             }
