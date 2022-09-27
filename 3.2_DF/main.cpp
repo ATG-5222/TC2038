@@ -42,6 +42,38 @@ void Dijkstra(vector <int> &G, int x){
     }
 }
 
+// Parte 2 - Algoritmo de Floyd
+// Complejidad: O(n³)
+
+void Floyd(vector <int> &G, int x) {
+    int t[x][x], y = 0;
+    for(int i = 0; i < x; ++i) {
+        for(int j = 0; j < x; ++j) {
+            t[i][j] = G[y];
+            y++;
+        }
+    }
+    for(int f = 0; f < x; ++f) {
+        for(int i = 0; i < x; ++i) {
+            for(int j = 0; j < x ; ++j) {
+                if(t[i][j] > (t[f][j] + t[i][f]) && (t[f][j] != INF && t[i][f] != INF)) t[i][j] = t[f][j] + t[i][f];
+            }
+        }
+    }
+    printf("\nFloyd: \n");
+    for(int i = 0; i < x; ++i) {
+        for(int j = 0; j < x; ++j) {
+            if(t[i][j] == INF)
+            cout << "-1" << " ";
+            else
+            cout << t[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+// Complejidad general del programa: O(n³)
+
 int main() {
     int x;
     vector<int> G;
@@ -53,6 +85,12 @@ int main() {
         G.push_back(d);
     }
     Dijkstra(G, x);
+
+    for(int i = 0; i < G.size(); ++i) {
+        if(G[i] == -1)
+        G[i] = INF;
+    }
+    Floyd(G, x);
 
     return 0;
 }
