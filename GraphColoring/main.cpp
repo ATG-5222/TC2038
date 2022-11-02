@@ -12,6 +12,8 @@
 
 using namespace std;
 
+//Complejidad general del programa: O(n²)
+
 // Verifica que todo este correcto para el grafo y colores
 bool verificar(int size, vector<vector<bool>> grafo, int colors[]){
     for (int i = 0; i < size; i++){
