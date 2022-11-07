@@ -37,7 +37,7 @@ int main(){
         for(int i = 1; i<=n; i++){
             scanf("%d", &wt[i]);
             sum += wt[i];
-            }
+        }
         printf("%d\n", sum - 2*divide(n, sum/2));
     }
     return 0;
