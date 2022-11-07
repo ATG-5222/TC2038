@@ -1,6 +1,5 @@
 // Dividing coins
 // Aldo Tena García - A01275222
-// Renato Sebastían Ramirez Calva - A01275401
 // Marco Antonio Camalich Pérez - A01351725
 
 #include <iostream>
