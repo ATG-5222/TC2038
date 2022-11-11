@@ -15,12 +15,12 @@ void Tsp(vector<int>& graph, int m, int n){
         }
     }
 
-    vector <int> V; 
-    vector <int> v;
+    vector<int> V; 
+    vector<int> v;
     v.push_back(0);
 
-    for (int i = 0; i < n; i++){
-        if (i != m){
+    for(int i = 0; i < n; i++){
+        if(i != m){
             V.push_back(i);
         }
     }
@@ -30,8 +30,9 @@ void Tsp(vector<int>& graph, int m, int n){
     do{
         int p = 0, k = m;
         vector<int> T;
-        for (int i = 0; i < V.size(); i++) {
-            p += G[k][V[i]]; k = V[i];
+        for(int i = 0; i < V.size(); i++){
+            p += G[k][V[i]]; 
+            k = V[i];
             T.push_back(V[i]);
         }
         p += G[k][m];
