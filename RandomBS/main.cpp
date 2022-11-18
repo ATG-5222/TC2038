@@ -2,53 +2,86 @@
 // Archivo: main.cpp
 // Autores:
 //      Aldo Tena García - A01275222
-// Fecha: 14/11/2022
+// Fecha: 18/11/2022
 // =========================================================
 
-#include<bits/stdc++.h>
 #include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
-int part(int elems[], int ini, int fin) {
-    int ind = ini;
-    for(int i=ini; i<fin; i++) {
-        if(elems[i] < elems[fin]) {
-            swap(elems[i], elems[ind]);
-            ind = ind+1;
+int N;
+
+bool checkValue(int *array, int key){
+    int value = 0;
+    for (int i = 0; i < N; i++){
+        if (array[i] == key){
+            value++;
         }
     }
-    swap(elems[fin], elems[ind]);
-    return ind;
-}
-
-int getRandomPivot(int elems[], int ini, int fin) {
-    int ran = rand();
-    int pvt = ini + ran%(fin-ini+1); 
-    swap(elems[fin], elems[pvt]);
-    return part(elems, ini, fin);
-}
-
-void QuickSort(int arr[], int ini, int fin){
-    if(ini < fin) {
-        int ind = getRandomPivot(arr, ini, fin);
-        QuickSort(arr, ini, ind-1);
-        QuickSort(arr, ind+1, fin);
+    if (value > 0){
+        return true;
+    }else{
+        return false;
     }
 }
+
+int binarySearch(int *array, int key, int low, int high){
+    int mid;
+    if (high > low){
+        mid = low + ((high - low) / 2);
+        if (key == array[mid]){
+            return 1;
+        }else if (key < array[mid]){
+            return 1 + binarySearch(array, key, low, mid - 1);
+        }else{
+            return 1 + binarySearch(array, key, mid + 1, high);
+        }
+    }
+    return -1;
+} 
+
+
+int randomBinarySearch(int *array, int key, int low, int high) {
+    int mid;
+    if (high > low) {
+        mid = low + (rand() % (high - low + 1));
+        if (key == array[mid]) {
+            return 1;
+        } else if (key < array[mid]) {
+            return 1 + randomBinarySearch(array, key, low, mid - 1);
+        } else {
+            return 1 + randomBinarySearch(array, key, mid + 1, high);
+        }
+    }
+    return -1;
+} 
 
 int main() {
-    int n, parr; 
-    cin >> n;
-    int elems[0xfffff];
 
-    for (int i = 0; i < n; i++) {
-        cin >> elems[i];
+    cin >> N;
+    int firstArray[N];
+    for (int i = 0; i < N; i++) {
+        cin >> firstArray[i];
     }
 
-    parr=n-1;
-    QuickSort(elems, 0, parr);
-    for (int i=0; i<n; i++) {
-        cout<<elems[i]<<" "; 
+    int Q;
+    cin >> Q;
+    int secondArray[Q];
+
+    for (int i = 0; i < Q; i++) {
+        cin >> secondArray[i];
     }
+
+    for (int i = 0; i < Q; i++) {
+        int normalBS = binarySearch(firstArray, secondArray[i], 0, secondArray[i] + 1);
+        if (normalBS == 0) normalBS = -1;
+        int randomBS = randomBinarySearch(firstArray, secondArray[i], 0, secondArray[i] + 1);
+        if (randomBS == 0) normalBS = -1;
+        cout << "Number = " << secondArray[i] << " using binary search = " << normalBS
+        << ", using randomized binary search = " << randomBS << endl;
+    }
+
 }
