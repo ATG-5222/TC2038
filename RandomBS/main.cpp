@@ -31,13 +31,13 @@ int binarySearch(int *array, int key, int low, int high){
 
 int randomBinarySearch(int *array, int key, int low, int high) {
     int mid;
-    if (high > low) {
+    if (high > low){
         mid = low + (rand() % (high - low + 1));
-        if (key == array[mid]) {
+        if (key == array[mid]){
             return 1;
-        } else if (key < array[mid]) {
+        } else if (key < array[mid]){
             return 1 + randomBinarySearch(array, key, low, mid - 1);
-        } else {
+        } else{
             return 1 + randomBinarySearch(array, key, mid + 1, high);
         }
     }
@@ -56,16 +56,19 @@ int main() {
     int M;
     cin >> M;
     int secondArray[M];
-
     for (int i = 0; i < M; i++){
         cin >> secondArray[i];
     }
 
     for (int i = 0; i < M; i++){
-        int normalBS = binarySearch(firstArray, secondArray[i], 0, secondArray[i] + 1);
-        if (normalBS == 0) normalBS = -1;
-        int randomBS = randomBinarySearch(firstArray, secondArray[i], 0, secondArray[i] + 1);
-        if (randomBS == 0) normalBS = -1;
+        int normalBS = binarySearch(firstArray, secondArray[i], 0, secondArray[i]+1);
+        if (normalBS == 0){
+            normalBS = -1;
+        }
+        int randomBS = randomBinarySearch(firstArray, secondArray[i], 0, secondArray[i]+1);
+        if (randomBS == 0){
+            normalBS = -1;
+        }
         cout << "Number = " << secondArray[i] << " using binary search = " << normalBS
         << ", using randomized binary search = " << randomBS << endl;
     }
