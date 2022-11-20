@@ -2,31 +2,17 @@
 // Archivo: main.cpp
 // Autores:
 //      Aldo Tena García - A01275222
-// Fecha: 18/11/2022
+//      Renato Sebastían Ramirez Calva - A01275401
+// Fecha: 20/11/2022
 // =========================================================
 
+#include <bits/stdc++.h>
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
 
 using namespace std;
-
-int N;
-
-bool checkValue(int *array, int key){
-    int value = 0;
-    for (int i = 0; i < N; i++){
-        if (array[i] == key){
-            value++;
-        }
-    }
-    if (value > 0){
-        return true;
-    }else{
-        return false;
-    }
-}
 
 int binarySearch(int *array, int key, int low, int high){
     int mid;
@@ -42,7 +28,6 @@ int binarySearch(int *array, int key, int low, int high){
     }
     return -1;
 } 
-
 
 int randomBinarySearch(int *array, int key, int low, int high) {
     int mid;
@@ -61,21 +46,22 @@ int randomBinarySearch(int *array, int key, int low, int high) {
 
 int main() {
 
+    int N;
     cin >> N;
     int firstArray[N];
     for (int i = 0; i < N; i++) {
         cin >> firstArray[i];
     }
 
-    int Q;
-    cin >> Q;
-    int secondArray[Q];
+    int M;
+    cin >> M;
+    int secondArray[M];
 
-    for (int i = 0; i < Q; i++) {
+    for (int i = 0; i < M; i++){
         cin >> secondArray[i];
     }
 
-    for (int i = 0; i < Q; i++) {
+    for (int i = 0; i < M; i++){
         int normalBS = binarySearch(firstArray, secondArray[i], 0, secondArray[i] + 1);
         if (normalBS == 0) normalBS = -1;
         int randomBS = randomBinarySearch(firstArray, secondArray[i], 0, secondArray[i] + 1);
