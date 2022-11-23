@@ -13,32 +13,29 @@
 
 using namespace std;
 
-bool B(vector<vector<int>> e, int sta, int end, int p[], int n) {
+bool B(vector<vector<int>> e, int sta, int end, int p[], int n){
     bool v[n];
     memset(v, 0, n);
     v[sta] = true;
     p[sta] = -1;
     queue<int> q;
     q.push(sta);
-    while(!q.empty()){
-        int j = q.front(); 
-        q.pop();
-        for(int i = 0; i < n; i++){
+    while(! q.empty()){
+        int j = q.front(); q.pop();
+        for(int i = 0; i < n; i++) {
             if(v[i] == false and e[j][i] > 0){
-                if(i == end){
+                if(i == end) {
                     p[i] = j;
                     return true;
                 }
-                q.push(i); 
-                p[i] = j; 
-                v[i] = true;
+                q.push(i); p[i] = j; v[i] = true;
             }
         }
     }
     return false;
 }
 
-int MaxFlow(vector<vector<int>> G, int sta, int end) {
+int MaxFlow(vector<vector<int>> G, int sta, int end){
     int n = G.size();
     vector<vector<int>> e(n, vector<int>(n));
     for(int i = 0; i < n; i++){
@@ -50,13 +47,11 @@ int MaxFlow(vector<vector<int>> G, int sta, int end) {
     while(B(e, sta, end, p, n)){
         int k = INT_MAX;
         for(int i = end; i != sta; i = p[i]){
-            int j = p[i]; 
-            k = min(k, e[j][i]);
+            int j = p[i]; k = min(k, e[j][i]);
         }
         for(int i = end; i != sta; i = p[i]){
             int j = p[i];
-            e[j][i] -= k;
-            e[i][j] += k;
+            e[j][i] -= k;e[i][j] += k;
         }
         m += k;
     }
