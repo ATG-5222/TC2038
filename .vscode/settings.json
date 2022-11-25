@@ -47,6 +47,12 @@
         "xutility": "cpp",
         "map": "cpp",
         "xtree": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "algorithm": "cpp",
+        "deque": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp",
+        "xlocmon": "cpp",
+        "xloctime": "cpp"
     }
 }
