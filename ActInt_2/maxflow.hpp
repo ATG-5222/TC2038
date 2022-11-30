@@ -1,9 +1,9 @@
 // =========================================================
-// File: main.cpp
+// File: maxflow.hpp
 // Authors:
 // Aldo Tena García - A01275222
 // Renato Sebastían Ramirez Calva - A01275401
-// Date: 11/11/2022
+// Date: 30/11/2022
 // =========================================================
 
 #include<bits/stdc++.h>
@@ -13,6 +13,7 @@
 
 using namespace std;
 
+//Complejidad de la función B: O(n²)
 bool B(vector<vector<int>> e, int sta, int end, int p[], int n){
     bool v[n];
     memset(v, 0, n);
@@ -35,6 +36,7 @@ bool B(vector<vector<int>> e, int sta, int end, int p[], int n){
     return false;
 }
 
+//Complejidad de la función MaxFlow: O(n²)
 int MaxFlow(vector<vector<int>> G, int sta, int end){
     int n = G.size();
     vector<vector<int>> e(n, vector<int>(n));

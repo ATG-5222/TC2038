@@ -1,3 +1,11 @@
+// =========================================================
+// File: kruskal.hpp
+// Authors:
+// Aldo Tena García - A01275222
+// Renato Sebastían Ramirez Calva - A01275401
+// Date: 30/11/2022
+// =========================================================
+
 #include<bits/stdc++.h>
 #include <iostream>
 #include <vector>
@@ -8,11 +16,14 @@ using namespace std;
 
 using namespace std;
 
+//Complejidad maxima de la clase G: O(n)
 class D{
     public:
     int x, y, c;
     D(int n, int m, int c){
-        x = n; y = m; this -> c = c;
+        x = n; 
+        y = m; 
+        this -> c = c;
     }
     bool operator < (D a){
         return(c < a.c);
@@ -28,7 +39,8 @@ class D{
     }
 };
 
-class G {
+//Complejidad maxima de la clase G: O(n²)
+class G{
     public:
     vector<D> ar;
     int graph;
@@ -37,6 +49,7 @@ class G {
         this -> graph = _graph;
     }
 
+    //Complejidad de la función Kruskal: O(nlogn)
     void Kruskal(){
         vector<D> t;
         int *s = new int[graph];
@@ -55,6 +68,7 @@ class G {
         }
     }
 
+    //Complejidad de la función Dijkstra: O(n³)
     void Dijkstra(vector <int> & arr, int n){
         for(int j = 0; j < n; j++){
             vector<int> d(n, M);
@@ -80,21 +94,23 @@ class G {
         }
     }
 
+    //Complejidad de la función Add: O(n)
     void Add(int n, int m, int c){
         D ari(n, m, c);
         ar.push_back(ari);
     }
 
+    //Complejidad de la función merge: O(n)
     void merge(int s[], int x1, int y2){
         int a = find(s, x1), b = find(s, y2);
         s[a] = b;
     }
 
+    //Complejidad de la función find: O(n)
     int find(int j[], int i){
-        if(j[i] == -1) {
+        if(j[i] == -1){
             return i;
         }
-
         return find(j, j[i]);
     }
 };
