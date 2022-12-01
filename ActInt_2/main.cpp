@@ -18,7 +18,6 @@ using namespace std;
 //Complejidad general del programa: O(n³)
 
 int main(){
-
     vector<int> x;
     vector<int> y;
     vector<vector<int>> z;
@@ -40,6 +39,7 @@ int main(){
             z.push_back(y); 
             y.clear();
         }
+
         G res(n);
         cout << "-------------------------------------\nProblem 1" << endl;
         res.Dijkstra(x, n);
